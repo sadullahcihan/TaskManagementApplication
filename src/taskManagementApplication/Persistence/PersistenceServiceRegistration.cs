@@ -6,13 +6,18 @@ using Persistence.Contexts;
 using Application.Services.Repositories;
 using Persistence.Repositories;
 
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+
+
 namespace Persistence;
 
 public static class PersistenceServiceRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<BaseDbContext>(options => options.UseInMemoryDatabase("BaseDb"));
+        services.AddDbContext<BaseDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("BaseDb")));
+
         services.AddDbMigrationApplier(buildServices => buildServices.GetRequiredService<BaseDbContext>());
 
 
