@@ -16,6 +16,8 @@ using NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.JWT;
+using Application.Services.Users;
+using Application.Services.Duties;
 
 namespace Application;
 
@@ -53,6 +55,8 @@ public static class ApplicationServiceRegistration
         services.AddYamlResourceLocalization();
 
 
+        services.AddScoped<IUserService, UserManager>();
+        services.AddScoped<IDutyService, DutyManager>();
         return services;
     }
 
