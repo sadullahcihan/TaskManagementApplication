@@ -52,7 +52,6 @@ public static class ApplicationServiceRegistration
 
         services.AddYamlResourceLocalization();
 
-        services.AddSecurityServices<Guid, int, Guid>(tokenOptions);
 
         return services;
     }
