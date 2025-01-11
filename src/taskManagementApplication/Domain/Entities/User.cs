@@ -5,7 +5,6 @@ using NArchitecture.Core.Persistence.Repositories;
 namespace Domain.Entities;
 public class User : Entity<Guid>
 {
-    public Guid Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
