@@ -36,16 +36,22 @@ builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(opt =>
-    opt.AddDefaultPolicy(p =>
+{
+    opt.AddPolicy("AllowLocalhost", p =>
     {
-        p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-    })
-);
+        p.WithOrigins("http://localhost:3000")
+         .AllowAnyMethod()
+         .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddSwaggerGen(opt =>
 {
 });
 
 WebApplication app = builder.Build();
+app.UseCors("AllowLocalhost");
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
